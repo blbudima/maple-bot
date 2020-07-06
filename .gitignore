@@ -1,0 +1,5 @@
+# ignore config.json
+config.json
+
+# ignore linter
+.eslintrc.json
