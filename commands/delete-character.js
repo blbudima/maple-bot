@@ -38,7 +38,6 @@ module.exports = {
     // construct model
     const query = {
       guild: message.guild.id,
-      username: message.member.user,
       game: new RegExp("\\b" + ggame + "\\b", "i"),
       character: ccharacter,
     };

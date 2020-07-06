@@ -34,6 +34,13 @@ const cooldowns = new Discord.Collection();
 // this event will only trigger one time after logging in
 client.once("ready", () => {
   console.log("ready!");
+  client.user.setStatus("available");
+  client.user
+    .setPresence({
+      activity: { name: `nothing. Use ${config.prefix}help for assistance!` },
+    })
+    .then(console.log)
+    .catch(console.error);
 });
 
 client.on("message", (message) => {

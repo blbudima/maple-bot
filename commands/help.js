@@ -13,7 +13,7 @@ module.exports = {
 
     if (!args.length) {
       data.push(
-        `Hello! I am a bot designed to help friends keep track of friends. You can use my commands to create a profile of characters for yourself, and other people can search you up!\nUse \`${config.prefix}ac\` to get started.\nHave any feedback? Use \`${config.prefix}feedback\`!`
+        `Hello! I am a bot designed to help friends keep track of friends. You can use my commands to create a profile of characters for yourself, and other people can search you up!\nUse \`${config.prefix}ac\` to get started.\nHave any feedback? Use \`${config.prefix}feedback\`\n!`
       );
       data.push("Here's a list of all my commands:");
       data.push(commands.map((command) => command.name).join(", "));
