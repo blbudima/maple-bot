@@ -1,12 +1,12 @@
-const Character = require("../models/character");
-const Discord = require("discord.js");
+const Discord = require('discord.js');
+const Character = require('../models/character');
 
 module.exports = {
-  name: "list-characters-for-game",
-  aliases: ["lcfg", "list-chars-for-game"],
+  name: 'list-characters-for-game',
+  aliases: ['lcfg', 'list-chars-for-game'],
   description:
-    "List all characters for a specific game within this Discord server.\n\tCase-insensitive.\n\tPlease enclose the game with double quotations.",
-  usage: "<game>",
+    'List all characters for a specific game within this Discord server.\n\tCase-insensitive.\n\tPlease enclose the game with double quotations.',
+  usage: '<game>',
   args: true,
   guildOnly: true,
   cooldown: 3,
@@ -23,16 +23,14 @@ module.exports = {
     // extract game
     const ggame = argList[0];
     if (!ggame) {
-      return message.reply(
-        "Incorrect usage! Please supply the name of the game."
-      );
+      return message.reply('Incorrect usage! Please supply the name of the game.');
     }
 
     const charList = [];
     Character.find({ guild: message.guild.id }, (err, characters) => {
       if (err) {
         console.error(err);
-        message.reply("there was an error. Please try again!");
+        message.reply('there was an error. Please try again!');
       }
 
       characters.map((char) => {
@@ -42,7 +40,7 @@ module.exports = {
       });
 
       if (charList.length === 0) {
-        message.reply("there are no characters for your game!");
+        message.reply('there are no characters for your game!');
       } else {
         const charsEmbed = new Discord.MessageEmbed();
 
@@ -55,19 +53,19 @@ module.exports = {
         }
 
         charList.forEach((element) => {
-          charsEmbed.setColor("DARK_VIVID_PINK").addFields(
+          charsEmbed.setColor('DARK_VIVID_PINK').addFields(
             {
-              name: "Discord",
+              name: 'Discord',
               value: element.username,
               inline: true,
             },
             {
-              name: "Name",
+              name: 'Name',
               value: element.character,
               inline: true,
             },
             {
-              name: "Description",
+              name: 'Description',
               value: element.description,
               inline: true,
             }

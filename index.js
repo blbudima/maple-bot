@@ -1,23 +1,21 @@
 // file system
-const fs = require("fs");
+const fs = require('fs');
 
 // require the discord.js module
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 
 // customize bot token and prefix based on config.json
-const config = require("./config.json");
+const config = require('./config.json');
 
-console.log("preparing bot...");
+console.log('preparing bot...');
 
 // require a new Discord client
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-client.mongoose = require("./utils/mongoose");
+client.mongoose = require('./utils/mongoose');
 
 // establish file system
-const commandFiles = fs
-  .readdirSync("./commands")
-  .filter((file) => file.endsWith(".js"));
+const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
@@ -32,18 +30,17 @@ const cooldowns = new Discord.Collection();
 
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
-client.once("ready", () => {
-  console.log("ready!");
-  client.user.setStatus("available");
+client.once('ready', () => {
+  console.log('ready!');
+  client.user.setStatus('available');
   client.user
     .setPresence({
       activity: { name: `nothing. Use ${config.prefix}help for assistance!` },
     })
-    .then(console.log)
     .catch(console.error);
 });
 
-client.on("message", (message) => {
+client.on('message', (message) => {
   // if the message is not a designated command, then ignore
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
@@ -54,15 +51,13 @@ client.on("message", (message) => {
   // extract command from command name
   const command =
     client.commands.get(commandName) ||
-    client.commands.find(
-      (cmd) => cmd.aliases && cmd.aliases.includes(commandName)
-    );
+    client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 
   // check if the command name is valid
   if (!command) return message.reply("that's an invalid command!");
 
   // check if command is only allowed in servers
-  if (command.guildOnly && message.channel.type !== "text") {
+  if (command.guildOnly && message.channel.type !== 'text') {
     return message.reply(
       "I can't execute that command inside DMs! Please find a proper server to execute that command."
     );
@@ -94,9 +89,9 @@ client.on("message", (message) => {
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
       return message.reply(
-        `please wait ${timeLeft.toFixed(
-          1
-        )} more second(s) before reusing the \`${command.name}\` command.`
+        `please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${
+          command.name
+        }\` command.`
       );
     }
   } else {
@@ -109,7 +104,7 @@ client.on("message", (message) => {
     command.execute(message, args);
   } catch (error) {
     console.error(error);
-    message.reply("there was an error trying to execute that command!");
+    message.reply('there was an error trying to execute that command!');
   }
 });
 

@@ -1,11 +1,11 @@
-const Character = require("../models/character");
-const Discord = require("discord.js");
+const Discord = require('discord.js');
+const Character = require('../models/character');
 
 module.exports = {
-  name: "list-characters",
-  aliases: ["lc", "list-chars"],
-  description: "List all characters for all games within this Discord server.",
-  usage: "",
+  name: 'list-characters',
+  aliases: ['lc', 'list-chars'],
+  description: 'List all characters for all games within this Discord server.',
+  usage: '',
   args: false,
   guildOnly: true,
   cooldown: 10,
@@ -14,7 +14,7 @@ module.exports = {
     Character.find({ guild: message.guild.id }, (err, characters) => {
       if (err) {
         console.error(err);
-        message.reply("there was an error. Please try again!");
+        message.reply('there was an error. Please try again!');
       }
 
       characters.map((char) => {
@@ -42,9 +42,7 @@ module.exports = {
       );
 
       if (sortedGamesList.size === 0) {
-        return message.reply(
-          "there are no characters registered in this server!"
-        );
+        return message.reply('there are no characters registered in this server!');
       }
 
       for (const [key, value] of sortedGamesList) {
@@ -57,19 +55,19 @@ module.exports = {
         }
 
         value.forEach((element) => {
-          charsEmbed.setColor("DARK_VIVID_PINK").addFields(
+          charsEmbed.setColor('DARK_VIVID_PINK').addFields(
             {
-              name: "Discord",
+              name: 'Discord',
               value: element.username,
               inline: true,
             },
             {
-              name: "Name",
+              name: 'Name',
               value: element.character,
               inline: true,
             },
             {
-              name: "Description",
+              name: 'Description',
               value: element.description,
               inline: true,
             }

@@ -1,24 +1,22 @@
-const Feedback = require("../models/feedback");
-const Discord = require("discord.js");
-const mongoose = require("mongoose");
+const Discord = require('discord.js');
+const mongoose = require('mongoose');
+const Feedback = require('../models/feedback');
 
 module.exports = {
-  name: "feedback",
-  aliases: ["fb"],
+  name: 'feedback',
+  aliases: ['fb'],
   description:
-    "Have any comments or suggestions to improve this bot? This command allows you to offer your feedback.\n\tUnlike other commands, you do NOT have to surround your feedback with double quotations.\n\tMaximum 1000 characters.",
-  usage: "<your feedback>",
+    'Have any comments or suggestions to improve this bot? This command allows you to offer your feedback.\n\tUnlike other commands, you do NOT have to surround your feedback with double quotations.\n\tMaximum 1000 characters.',
+  usage: '<your feedback>',
   guildOnly: true,
   args: true,
   cooldown: 15,
   execute(message, args) {
-    let feedbackString = "";
-    feedbackString = args.join(" ");
+    let feedbackString = '';
+    feedbackString = args.join(' ');
 
     if (feedbackString.length > 1000) {
-      return message.reply(
-        "your feedback is too long! Please keep it within 1000 characters."
-      );
+      return message.reply('your feedback is too long! Please keep it within 1000 characters.');
     }
     // construct model
     const feedback = new Feedback({
@@ -32,18 +30,18 @@ module.exports = {
       .save()
       .then((result) => {
         console.log(result);
-        message.reply("thank you for your feedback!");
+        message.reply('thank you for your feedback!');
         const charEmbed = new Discord.MessageEmbed()
-          .setColor("DARK_GREEN")
-          .setTitle("ADDED:")
+          .setColor('DARK_GREEN')
+          .setTitle('ADDED:')
           .addFields(
             {
-              name: "Discord",
+              name: 'Discord',
               value: message.member,
               inline: true,
             },
             {
-              name: "Description",
+              name: 'Description',
               value: feedbackString,
               inline: true,
             }
@@ -52,9 +50,7 @@ module.exports = {
       })
       .catch((err) => {
         console.error(err);
-        message.reply(
-          "there was an error recording your feedback. Please try again."
-        );
+        message.reply('there was an error recording your feedback. Please try again.');
       });
   },
 };

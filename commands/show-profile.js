@@ -1,22 +1,20 @@
-const Character = require("../models/character");
-const Discord = require("discord.js");
+const Discord = require('discord.js');
+const Character = require('../models/character');
 
 module.exports = {
-  name: "show-profile",
-  aliases: ["sp"],
+  name: 'show-profile',
+  aliases: ['sp'],
   description:
-    "Shows the list of characters under a Discord account within this server\n\tIf you do not mention another user with this command, then it will show your own profile.\n\tIf you would like to see the profile of another user, then please mention them alongside the command.",
-  usage: "<@username>",
+    'Shows the list of characters under a Discord account within this server\n\tIf you do not mention another user with this command, then it will show your own profile.\n\tIf you would like to see the profile of another user, then please mention them alongside the command.',
+  usage: '<@username>',
   guildOnly: true,
   execute(message, args) {
-    let extractedUser = undefined;
+    let extractedUser;
     if (!message.mentions.users.size) {
       extractedUser = message.member.user;
     } else {
       if (message.mentions.users.size > 1) {
-        return message.reply(
-          "you mentioned too many users! Please only mention one."
-        );
+        return message.reply('you mentioned too many users! Please only mention one.');
       }
       message.mentions.users.map((user) => {
         extractedUser = user;
@@ -30,9 +28,7 @@ module.exports = {
     query.exec((err, docs) => {
       if (err) {
         console.error(err);
-        message.reply(
-          "there was an error showing the profile. Please try again."
-        );
+        message.reply('there was an error showing the profile. Please try again.');
       } else if (docs.length === 0) {
         message.reply(
           `${extractedUser} does not have any characters registered in this Discord server!`
@@ -65,10 +61,10 @@ module.exports = {
 
         const profileEmbed = new Discord.MessageEmbed()
           .setTitle(message.member.user.username)
-          .setColor("LUMINOUS_VIVID_PINK")
+          .setColor('LUMINOUS_VIVID_PINK')
           .setThumbnail(
             message.author.displayAvatarURL({
-              format: "png",
+              format: 'png',
               dynamic: true,
             })
           );
@@ -91,7 +87,7 @@ module.exports = {
           charsEmbed.setAuthor(
             `${extractedUser.username}`,
             message.author.displayAvatarURL({
-              format: "png",
+              format: 'png',
               dynamic: true,
             })
           );
@@ -102,19 +98,19 @@ module.exports = {
           }
 
           value.forEach((element) => {
-            charsEmbed.setColor("DARK_VIVID_PINK").addFields(
+            charsEmbed.setColor('DARK_VIVID_PINK').addFields(
               {
-                name: "Discord",
+                name: 'Discord',
                 value: element.username,
                 inline: true,
               },
               {
-                name: "Name",
+                name: 'Name',
                 value: element.character,
                 inline: true,
               },
               {
-                name: "Description",
+                name: 'Description',
                 value: element.description,
                 inline: true,
               }

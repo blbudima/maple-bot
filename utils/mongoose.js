@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const config = require("../config.json");
+const mongoose = require('mongoose');
+const config = require('../config.json');
 
 module.exports = {
   init: () => {
@@ -13,16 +13,16 @@ module.exports = {
 
     mongoose.Promise = global.Promise;
 
-    mongoose.connection.on("connected", () => {
-      console.log("mongoose has succesfully connected!");
+    mongoose.connection.on('connected', () => {
+      console.log('mongoose has succesfully connected!');
     });
 
-    mongoose.connection.on("err", (err) => {
+    mongoose.connection.on('err', (err) => {
       console.error(`there has been an error with mongoose:\n${err}`);
     });
 
-    mongoose.connection.on("disconnected", () => {
-      console.warn("mongoose connection lost");
+    mongoose.connection.on('disconnected', () => {
+      console.warn('mongoose connection lost');
     });
   },
 };

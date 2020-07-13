@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const feedbackSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -7,6 +7,6 @@ const feedbackSchema = mongoose.Schema({
   feedback: String,
 });
 
-mongoose.set("useFindAndModify", false);
+mongoose.set('useFindAndModify', false);
 
-module.exports = mongoose.model("Feedback", feedbackSchema);
+module.exports = mongoose.model('Feedback', feedbackSchema);

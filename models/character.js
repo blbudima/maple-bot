@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const characterSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -9,6 +9,6 @@ const characterSchema = mongoose.Schema({
   description: String,
 });
 
-mongoose.set("useFindAndModify", false);
+mongoose.set('useFindAndModify', false);
 
-module.exports = mongoose.model("Character", characterSchema);
+module.exports = mongoose.model('Character', characterSchema);

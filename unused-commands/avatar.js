@@ -1,12 +1,12 @@
 module.exports = {
-  name: "avatar",
-  aliases: ["icon", "pfp"],
+  name: 'avatar',
+  aliases: ['icon', 'pfp'],
   description: "Prints a URL to user's avatar.",
   execute(message, args) {
     if (!message.mentions.users.size) {
       return message.channel.send(
         `Your avatar: <${message.author.displayAvatarURL({
-          format: "png",
+          format: 'png',
           dynamic: true,
         })}`
       );
@@ -14,7 +14,7 @@ module.exports = {
 
     const avatarList = message.mentions.users.map((user) => {
       return `${user.username}'s avatar: <${user.displayAvatarURL({
-        format: "png",
+        format: 'png',
         dynamic: true,
       })}`;
     });
