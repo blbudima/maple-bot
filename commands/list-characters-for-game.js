@@ -14,9 +14,10 @@ module.exports = {
     // parse user arguments
     const re = /"(.*?)"/g;
     const argResult = [];
-    let current;
-    while ((current = re.exec(message))) {
+    let current = re.exec(message);
+    while (current) {
       argResult.push(current.pop());
+      current = re.exec(message);
     }
     const argList = argResult;
 
