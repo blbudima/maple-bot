@@ -36,6 +36,8 @@ Once you have the repository cloned, go ahead and make some changes to make the 
 
 You should also look into [node.js](https://nodejs.org/en/), a JavaScript runtime that can help you run your bot locally. The official discord.js guide covers using node.js to compile and run your JavaScript code.
 
+Furthermore, this bot uses [mongoose](https://mongoosejs.com/) to connect to MongoDB. You can create a free database cluster [here](https://www.mongodb.com/).
+
 **NOTE: Even if you choose not to make any changes to the bot, you MUST create a file titled `config.json` to the top directory of maple-bot. This file is used to log-in your bot as well as to define several other variables used by the bot.**
 
 Go ahead and create a file named `config.json` within the top directory of maple-bot, then paste the following code inside the file.
@@ -43,19 +45,22 @@ Go ahead and create a file named `config.json` within the top directory of maple
 ```
 {
   "token": "your-token-here",
-  "prefix": "##",
-  "defaultCooldown": 3,
-  "defaultTimer": 13.33
+  "prefix": "!!",
+  "defaultCooldown": 1,
+  "mongoPW": "your-pw-here",
+  "mongoDB": "your-db-here",
 }
 ```
 
 **Replace `your-token-here` with your personal bot token (remember where to find this?).**
 
-For `prefix` value, enter a character sequence that represents the prefix to activate the bot commands (e.g. you might have needed to type `!` or a `;;` to activate certain bots - this is the prefix!). I have mine set at `##`.
+For `prefix`, enter a character sequence that represents the prefix to activate the bot commands (e.g. you might have needed to type `!` or a `;;` to activate certain bots - this is the prefix!). I have mine set at `!!`.
 
 For `defaultCooldown`, enter an integer that represents the cooldown between commands in seconds that will help prevent command-spamming for your bot. I have mine set at `3`.
 
-For `defaultTimer`, enter a number the represents the interval between reminders in minutes. I have mine set at `13.33`.
+For `mongoPW`, enter a string that represents the password for your MongoDB.
+
+For `mongoDB`, enter a string that represents the database for your MongoDB.
 
 **If you are able to code the bot to your personal preference and are able to test it as well, then you should already know how to deploy your bot!** You can stop here if you want. Otherwise, if you still need assistance in deploying the bot, then the next section covers how to deploy the bot through your local computer.
 
